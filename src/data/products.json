@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Product A",
+        "price": 29.99,
+        "description": "A high-quality product that meets your needs.",
+        "category": "Electronics",
+        "stock": 100
+    },
+    {
+        "id": 2,
+        "name": "Product B",
+        "price": 19.99,
+        "description": "An affordable product with great features.",
+        "category": "Home & Kitchen",
+        "stock": 50
+    },
+    {
+        "id": 3,
+        "name": "Product C",
+        "price": 49.99,
+        "description": "A premium product for discerning customers.",
+        "category": "Fashion",
+        "stock": 25
+    },
+    {
+        "id": 4,
+        "name": "Product D",
+        "price": 9.99,
+        "description": "A budget-friendly product for everyday use.",
+        "category": "Books",
+        "stock": 200
+    },
+    {
+        "id": 5,
+        "name": "Product E",
+        "price": 59.99,
+        "description": "A versatile product suitable for various applications.",
+        "category": "Sports & Outdoors",
+        "stock": 75
+    }
+]
