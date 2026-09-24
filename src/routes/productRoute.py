@@ -8,13 +8,24 @@ productRouts = APIRouter() #creating an object/instacne of APIRouter class
 def getAllProducts():
     return get_all_products()
 
+
+@productRouts.get('/check')
+def getProductByQuery(id = None):
+    allProducts = get_all_products()
+    for oneProduct in allProducts:
+           if (str(oneProduct['id']) == id):
+                  return oneProduct
+    raise HTTPException(status_code=404, detail={"error": "Product Not Found using query"})
+
 @productRouts.get("/{id}")
-def getProducebyId(id):
+def getOneProducebyId(id):
     allProducts = get_all_products()
     for oneProduct in allProducts:
         if (str(oneProduct['id']) == id):
                return oneProduct
     raise HTTPException(status_code=404, detail={"error": "Product Not Found"})
+
+
 
 
 @productRouts.post("/create") #no routes will be repeated in entire project
