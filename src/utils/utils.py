@@ -6,4 +6,3 @@ def get_all_products():
     return json.load(p)
 
 
-
