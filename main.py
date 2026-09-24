@@ -4,9 +4,9 @@ from src.routes.productRoute import productRouts
 app = FastAPI() #creating an object/instacne of FastAPI class
 
 
-@app.get("/")
+@app.get("/home")
 def home():
     return { "Welcome to the FastAPI application!"}
 
 
-app.include_router(productRouts,prefix = "/product") #adding the router to the main app
+app.include_router(productRouts,prefix = "/products") #adding the router to the main app
