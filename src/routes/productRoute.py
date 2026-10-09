@@ -1,6 +1,7 @@
 from fastapi import APIRouter,HTTPException
-from src.utils.utils import get_all_products,creat_product
-from src.dtos.productSchema import CreateProduct
+from src.utils.utils import get_all_products,creat_product,simple_send
+from src.dtos.productSchema import CreateProduct,OrderSchema
+
 
 productRouts = APIRouter() #creating an object/instacne of APIRouter class
 
@@ -60,3 +61,26 @@ def deleteProduct(id: int):
             return {"message": "Product Deleted Successfully"}
 
     raise HTTPException(status_code=404, detail={"error": "Product Not Found"})
+
+
+
+## sending and email
+## data -product-id,count,customer-email
+@productRouts.post("/placeOrder") #no routes will be repeated in entire project
+async def placeOrder(Order: OrderSchema):
+    allProducts = get_all_products()
+    count = Order.count
+    product_id = Order.product_id
+    customer_email = Order.customer_email
+    print("customer_email",customer_email)
+    oneProduct = None
+    for p in allProducts:
+        if p["id"] == product_id:
+            oneProduct = p
+            break
+    if not oneProduct:
+        raise HTTPException(status_code=404, detail={"error": "Product Not Found"})
+    if oneProduct["stock"] < count:
+        raise HTTPException(status_code=400, detail={"error": "Insufficient stock"})
+    await simple_send(customer_email, count)
+    return {"message": "Order Placed Successfully"}
