@@ -50,3 +50,13 @@ def updateProduct(product: CreateProduct, id: int):
 
     raise HTTPException(status_code=404, detail={"error": "Product Not Found"})
 
+@productRouts.delete("/delete/{id}") #no routes will be repeated in entire project
+def deleteProduct(id: int):
+    allProducts = get_all_products()
+    for p in allProducts:
+        if p["id"] == id:
+            allProducts.remove(p)
+            creat_product(allProducts)
+            return {"message": "Product Deleted Successfully"}
+
+    raise HTTPException(status_code=404, detail={"error": "Product Not Found"})
