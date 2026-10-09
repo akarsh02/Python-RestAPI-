@@ -38,3 +38,15 @@ def createNewProduct(product:CreateProduct):
     products.append(product)
     creat_product(products)
     return {"message":"New Product Created "}
+
+@productRouts.put("/update/{id}") #no routes will be repeated in entire project
+def updateProduct(product: CreateProduct, id: int):
+    allProducts = get_all_products()
+    for index, existingProduct in enumerate(allProducts):
+        if existingProduct["id"] == id:
+            allProducts[index] = {"id": id, **product.model_dump()}
+            creat_product(allProducts)
+            return {"message": "Product Updated Successfully"}
+
+    raise HTTPException(status_code=404, detail={"error": "Product Not Found"})
+
